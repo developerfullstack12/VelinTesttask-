@@ -1,0 +1,177 @@
+<section class="home-bg-img pb-4">
+    <div class="container">
+        <div class="row pt-4">
+            <div class="col-lg-4 col-md-6 mt-4 ">
+                <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="transfer">
+                    <div class="text-white p-2 head-bg text-center">
+                        <i class="fa fa-refresh pt-2" aria-hidden="true"></i>
+                        <h3> Make a Transfer
+                        </h3>
+                    </div>
+                    <div class="transfer-bg p-4">
+                        <mat-form-field appearance="fill">
+                            <mat-label for="" class="mt-4"><b>From Account</b></mat-label><br>
+                            <input matInput type="text" placeholder="Free Checking(4692)-$5824.76"
+                                formControlName="formAccount" required>
+                            <mat-error *ngIf="formGroup.hasError('required', 'formAccount')">
+                                Please enter your From Account number
+                            </mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="fill">
+                            <mat-label for="" class="mt-4"><b>To Account</b></mat-label><br>
+                                <input matInput type="text" placeholder="georgia power electric Company"
+                                    formControlName="toAccount" required>
+                                <mat-error *ngIf="formGroup.hasError('required', 'toAccount')">
+                                    Please enter your To Account number
+                                </mat-error>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field appearance="fill">
+                            <mat-label for="number" class="mt-4"><b>Amount</b></mat-label><br>
+                            <input matInput type="number" placeholder="$ 0.00" formControlName="amount" required>
+                            <mat-error *ngIf="formGroup.hasError('required', 'amount')">
+                                Please fill amount
+                            </mat-error>
+                        </mat-form-field>
+                        <br>
+                        <div class="text-right pt-5 pb-3 ">
+                            <button type="submit" class="signup  text-white rounded">SUBMIT</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class=" col-lg-8 col-md-6 mt-4">
+                <div class="recent-transection">
+                    <div class=" text-white p-2 head-bg  text-center ">
+                        <i class="fa fa-briefcase pt-2" aria-hidden="true"></i>
+                        <h3>Recent
+                            Transection</h3>
+                    </div>
+                    <div class="p-4 search-bar">
+                        <div class="search-bar-flex">
+                            <!-- <div class="search-bar-input"> -->
+                            <mat-form-field appearance="standard">
+                                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+                            </mat-form-field>
+                            <!-- </div>     -->
+                            <div class="short-by">
+
+                                <label for="cars" class="pr-2"><b>sort by</b></label>
+                                <select (change)="onChange($event)">
+                                    <option aria-readonly="true">DATE</option>
+                                    <option value="ASC">ASC</option>
+                                    <option value="DESC">DESC</option>
+                                </select>
+                                <select name="cars" id="cars">
+                                    <option aria-readonly="true">BENEFICIARY</option>
+                                    <option value="ASC">ASC</option>
+                                    <option value="DESC">DESC</option>
+                                </select>
+                                <select (change)="onChangeAmount($event)">
+                                    <option aria-readonly="true">AMOUNT</option>
+                                    <option value="ASC">ASC</option>
+                                    <option value="DESC">DESC</option>
+                                </select>
+                                <!-- <div class="short-amount">BENEFICIARY</div>
+                                <div class="short-amount">AMOUNT</div> -->
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                                <ng-container matColumnDef="date">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header="date"> Date </th>
+                                    <td mat-cell *matCellDef="let element" (click)="clickData(element.id)"> {{element.date}} </td>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="image">
+                                    <th mat-header-cell *matHeaderCellDef> Image </th>
+                                    <td mat-cell *matCellDef="let element" (click)="clickData(element.id)"><img src={{element.image}}></td>
+                                </ng-container>
+
+
+                                <ng-container matColumnDef="mainHead">
+                                    <th mat-header-cell *matHeaderCellDef> Title </th>
+                                    <td mat-cell *matCellDef="let element" (click)="clickData(element.id)"><b> {{element.mainHead}} </b>
+                                        <p class="m-0">{{element.subHead}}</p>
+                                    </td>
+                                </ng-container>
+
+
+                                <!-- <ng-container matColumnDef="subHead">
+                                  <th mat-header-cell *matHeaderCellDef> subHead </th>
+                                  <td mat-cell *matCellDef="let element" (click)="clickData(element.id)"> {{element.subHead}} </td>
+                                </ng-container> -->
+
+                                <ng-container matColumnDef="amount">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header="amount"> Amount </th>
+                                    <td mat-cell *matCellDef="let element" (click)="clickData(element.id)"> {{element.amount}} </td>
+                                </ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                                <!-- Row shown when there is no matching data. -->
+                                <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+
+                        <!-- <div class="pt-4 change-table">
+                            <h3>Detalis for transection</h3>
+                           
+                            <div class="container">
+                                <div class="row">
+                                <div class="col-lg-6"><p>change transection</p></div>
+                                <div class="col-lg-6"><button class="btn">payed</button></div>
+                            </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+>
+
+<!-- <div class="pt-4 change-table">
+                            <div class="container"> 
+                                <div> 
+                                    <div class="heading">
+                                        <h3 class="pl-2">Detalis for transection</h3>
+                                    </div>
+                                    <div>
+                                        <table>
+                                            <tr>
+                                              <td>Amount</td>
+                                              <td>$23.99</td>
+                                            </tr>
+                                            <tr>
+                                              <td>Date</td>
+                                              <td>19 Oct 2020</td>
+                    
+                                            </tr>
+                                            <tr>
+                                              <td>To Contractor</td>
+                                              <td>The Tea Language</td>
+                    
+                                            </tr>
+                                            <tr>
+                                              <td>State</td>
+                                              <td>Paid</td>
+                                            </tr>
+                                          </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6"><p>change transection</p></div>
+                                    <div class="col-lg-6"><button class="btn">payed</button></div>
+                                </div>
+                    
+                            </div>
+                        </div> -->

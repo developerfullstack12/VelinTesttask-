@@ -1,0 +1,25 @@
+<section class="login">
+    <div class="conatiner">
+        <div class="row">
+            <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="transfer">
+                <div class="transfer-bg p-4">
+                    <label for="" class="mt-4"><b>Login Id</b></label><br>
+                    <input matInput type="text" formControlName="email">
+                    <mat-error *ngIf="formGroup.hasError('pattern', 'email')">
+                        Please enter correct email
+                    </mat-error>
+                    <mat-error *ngIf="formGroup.hasError('regex', 'email')">
+                        Please enter correcta email
+                    </mat-error>
+                    <label for="password" class="mt-4"><b>password</b></label><br>
+                    <input matInput type="password" formControlName="password"><br>
+                    <div class="text-right pt-5 pb-3 ">
+                        <button class="signup text-white rounded" mat-raised-button color="primary" type="submit">Log
+                            In</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</section>
